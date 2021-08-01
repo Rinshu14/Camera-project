@@ -1,0 +1,136 @@
+body{
+    margin: 0;
+}
+*
+{
+    box-sizing: border-box;
+}
+.video-container{
+    overflow: hidden;
+    height: 100vh;
+    width:100vw;
+    background-color: black;
+} 
+video
+{
+    height: 100%;
+    width: 100%;
+}
+button
+{
+    border-radius: 50%;
+    height: 5rem;
+    width:5rem;
+    position: fixed;
+    border: 8px solid white;
+    background-color: black;
+    right:4rem;
+    z-index: 3;
+    
+}
+#record
+{
+    top: 40vh;
+}
+#capture
+{
+    top:60vh
+}
+span
+{   
+    display: inline-block;
+    height: 2rem ;
+    background-color: white;
+    width: 2rem;
+    border-radius: 50%;
+}
+#record span
+{
+    background-color:red;  
+}
+.filters
+{
+    height: 12rem;
+    width:5rem;
+    border: 1px solid black;
+    position: fixed;
+    top:18vh;
+    left: 10vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+}
+.filter{
+    border: 1px solid black;
+  
+     width:5rem; 
+    flex-grow:1;/*it will devide the parent space in its given value */
+    background-image: url("pic.jpg");
+    background-size: cover;
+    background-blend-mode: color-burn;
+}
+.zoom
+{
+    height: 8rem;
+    width:5rem;
+    border: 1px solid black;
+    position: fixed;
+    top:45vh;
+    left: 10vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;  
+}
+.in,.out
+{
+    border: 1px solid #95a5a6;
+    width: 5rem;
+    flex-grow: 1;
+    background-color: #bdc3c7;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+   
+}
+.capture-animation
+{
+ 
+animation:shrinkdown ;
+animation-duration: 1s;
+animation-iteration-count: infinite;
+}
+.record-animation
+{
+ 
+animation:shrinkdown ;
+animation-duration: 1s;
+animation-iteration-count: infinite;
+}
+.filter-div
+{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+}
+
+@keyframes shrinkdown
+{
+    0%
+   {
+       transform: scale(1);
+   }
+   50%
+   {
+       transform: scale(0.5);
+   }
+   100%
+   {
+       transform: scale(1);
+   }
+}

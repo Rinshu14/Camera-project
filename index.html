@@ -5,11 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <video controls autoplay></video>
-     
-    <button id=button value="record">record</button>
+    <div class="video-container">
+        <video  controls autoplay></video>
+      
+    </div>
+    
+    <button  id="record"><span></span></button>
+    <button id="capture" ><span ></span></button>
+    <div class="filters">
+        <div class="filter" style="background-color:#ff383860"></div>
+        <div class="filter" style="background-color:#c46cf0b0"></div>
+        <div class="filter"></div>
+    </div>
+    <div class="zoom">
+        <div class="in">+</div>
+        <div class="out">-</div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
