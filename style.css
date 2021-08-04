@@ -119,6 +119,23 @@ animation-iteration-count: infinite;
     top: 0;
 }
 
+#gallery
+{
+    top:70vh;
+    left: 9vw;
+    border-radius: 50%;
+    /* background-color:#3c6382; */
+    border: 7px solid #60a3bc;
+    color:#2c2c54;
+    cursor:pointer;
+    font-size: 1.5rem;
+    width: 6rem;
+    height: 6rem;
+    font-weight: bold;
+    font-family: Snell Roundhand, cursive;
+    background-image: linear-gradient(white,#3c6382);
+}
+
 @keyframes shrinkdown
 {
     0%

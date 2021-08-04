@@ -10,9 +10,11 @@ let filter = "";// to store the color of filter that is applied so that we can u
 let zoomIn = document.querySelector(".in");
 let zoomOut = document.querySelector(".out");
 let currZoom = 1//minnimum will be 1 and max will be 3;
+let gallery=document.querySelector("#gallery")
 
-
-
+gallery.addEventListener("click",function(){
+    location.assign("gallery.html");
+})
 
 for (let i = 0; i < allFilters.length; i++) {
     allFilters[i].addEventListener("click", function (e) {
@@ -81,22 +83,25 @@ let promiseToUseCamera = navigator.mediaDevices.getUserMedia({ video: true, audi
 promiseToUseCamera.then(function (mediaStream) {
     videoplayer.srcObject = mediaStream;
     mediaRecorder = new MediaRecorder(mediaStream);//creating object of mediarecorder it provides the functunality to record and passing it mediastrem because it have input of camera and mic
-
+console.log(mediaRecorder)
     //overall this download the recorded video
-    mediaRecorder.addEventListener("dataavailabel", function (e)//to start recording 
+    mediaRecorder.addEventListener("dataavailable", function (e)//to start recording 
     {
+        // console.log(chunks.length)
         chunks.push(e.data);//pushing chunks of audion of video in a array called chunks
 
     })
 
     mediaRecorder.addEventListener("stop", function (e) {//it stop recording 
         let blob = new Blob(chunks, { type: "video/mp4" });//combining all chunks in blob
+        console.log(chunks.length,blob)
         chunks = [];
-        let link = URL.createObjectURL(blob);//creating link of blob so that we can provide in anchor tag to download
-        let a = document.createElement("a");
-        a.href = link;
-        a.download = "record.mp4";
-        a.click();//clicking anchor tag so that video will get download on stoping recording
+        saveMedia(blob);
+        // let link = URL.createObjectURL(blob);//creating link of blob so that we can provide in anchor tag to download
+        // let a = document.createElement("a");
+        // a.href = link;
+        // a.download = "record.mp4";
+        // a.click();//clicking anchor tag so that video will get download on stoping recording
     })
 
     capturebtn.addEventListener("click", function () {
@@ -126,11 +131,12 @@ promiseToUseCamera.then(function (mediaStream) {
 
         let url = canvas.toDataURL();//convert the canvas drawing into url
         canvas.remove();//we are removing because no longer we need it
-        let a = document.createElement("a");//creating the a tag so that we can provide it link  which is genrated by todataurl and download attribute to download the picture
-        a.href = url;
-        a.download = "image.png";
-        a.click();
-        a.remove();//we are removing because no longer we need it beacuse the purpose has been fulfilled
+        saveMedia(url);//now we dont need to create the anchor tag we can directly store in our indexdb
+        // let a = document.createElement("a");//creating the a tag so that we can provide it link  which is genrated by todataurl and download attribute to download the picture
+        // a.href = url;
+        // a.download = "image.png";
+        // a.click();
+        // a.remove();//we are removing because no longer we need it beacuse the purpose has been fulfilled
 
     });
 })
