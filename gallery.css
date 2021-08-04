@@ -27,6 +27,7 @@ body{
     border: 1px solid black;
     flex-shrink: 0;
     min-width: 385px;
+  
     
 
 }
@@ -57,8 +58,25 @@ body{
     background-color: #9AECDB;
     color:#182C61 ;
     min-width: 192px;
+    cursor: pointer;
 }
 .actual-media img,.actual-media video{
     height: 100%;
     width: 100%;
+}
+#to-camera{
+    
+  
+    border-radius: 10%;
+    margin-top:5vh;
+    margin-left: 43vw;
+    border: 7px solid #60a3bc;
+    color:#2c2c54;
+    cursor:pointer;
+    font-size: 1.5rem;
+    width: 14rem;
+    height: 6rem;
+    font-weight: bold;
+    font-family: Snell Roundhand, cursive;
+    background-image: linear-gradient(white,#3c6382);
 }

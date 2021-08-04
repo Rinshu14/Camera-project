@@ -17,6 +17,11 @@ req.addEventListener("error", function () {
 
 })
 
+let toCameraBtn=document.querySelector("#to-camera");
+toCameraBtn.addEventListener("click",function(){
+    location.assign("index.html");
+})
+
 function saveMedia(media) {
     if (database) {
         let transaction = database.transaction("media", "readwrite");
