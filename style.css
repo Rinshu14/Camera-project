@@ -95,7 +95,7 @@ span
     display: flex;
     justify-content: center;
     font-weight: bold;
-   
+    cursor: pointer;
 }
 .capture-animation
 {

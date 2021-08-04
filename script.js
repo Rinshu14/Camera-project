@@ -7,6 +7,11 @@ let capturebtn = document.querySelector("#capture");
 let body = document.querySelector("body");
 let allFilters = document.querySelectorAll(".filter");
 let filter = "";// to store the color of filter that is applied so that we can use it on canvas to see this filter effect on our downloaded pic
+let zoomIn = document.querySelector(".in");
+let zoomOut = document.querySelector(".out");
+let currZoom = 1//minnimum will be 1 and max will be 3;
+
+
 
 
 for (let i = 0; i < allFilters.length; i++) {
@@ -26,13 +31,33 @@ for (let i = 0; i < allFilters.length; i++) {
 
     })
 }
+ zoomIn.addEventListener("click",function()
+ {
+     currZoom=currZoom+0.1;
+     if(currZoom>3){currZoom=3};
+     videoplayer.style.transform=`scale(${currZoom})`;
+     console.log(currZoom);
+ })
 
+ zoomOut.addEventListener("click",function()
+ {
+     currZoom=currZoom-0.1;
+     if(currZoom<1){currZoom=1};
+     videoplayer.style.transform=`scale(${currZoom})`;
+     console.log(currZoom);
+ })
 
 //event listener on record button 
 recordbtn.addEventListener("click", function (e) {
     let span = recordbtn.querySelector("span");
 
+    let previouFilter = document.querySelector(".filter-div")//checking is alreay a filter exist  
 
+    if (previouFilter) {
+        previouFilter.remove();
+
+        filter = "";
+    }
     if (isrecording == true) {   //if recording is in progress
 
         isrecording = false;
@@ -46,15 +71,15 @@ recordbtn.addEventListener("click", function (e) {
 
     }
 })
+
+
 //navigator object given by object
 //media devices is a child object of navigator and provies the acces  of camera and mic and other media input
 //getusermedia is a function that ask for permission and turns on the camera and mic and returns the mediastream object contains
 //continuos input of camera and mic 
 let promiseToUseCamera = navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 promiseToUseCamera.then(function (mediaStream) {
-
     videoplayer.srcObject = mediaStream;
-
     mediaRecorder = new MediaRecorder(mediaStream);//creating object of mediarecorder it provides the functunality to record and passing it mediastrem because it have input of camera and mic
 
     //overall this download the recorded video
@@ -63,14 +88,8 @@ promiseToUseCamera.then(function (mediaStream) {
         chunks.push(e.data);//pushing chunks of audion of video in a array called chunks
 
     })
+
     mediaRecorder.addEventListener("stop", function (e) {//it stop recording 
-        let previouFilter = document.querySelector(".filter-div")//checking is alreay a filter exist  
-        if (previouFilter) {
-            previouFilter.remove();
-            filter = "";
-        }
-
-
         let blob = new Blob(chunks, { type: "video/mp4" });//combining all chunks in blob
         chunks = [];
         let link = URL.createObjectURL(blob);//creating link of blob so that we can provide in anchor tag to download
@@ -79,6 +98,7 @@ promiseToUseCamera.then(function (mediaStream) {
         a.download = "record.mp4";
         a.click();//clicking anchor tag so that video will get download on stoping recording
     })
+
     capturebtn.addEventListener("click", function () {
 
         let canvas = document.createElement("canvas");
@@ -90,7 +110,12 @@ promiseToUseCamera.then(function (mediaStream) {
         }, 1000)
         canvas.height = videoplayer.videoHeight
         canvas.width = videoplayer.videoWidth;
+        
         let tool = canvas.getContext("2d");
+         tool.translate(canvas.width/2,canvas.height/2);//shifting top-left corner of canvas to center 
+         tool.scale(currZoom,currZoom);//strachting the canvas paper to currzoomvalue to zoomit
+         tool.translate(-canvas.width/2,-canvas.height/2);//shifting top-left corner of canvas to again its originaln value
+
         tool.drawImage(videoplayer, 0, 0);//it drwas the image on canvas we can provide theimag as well as image tag here 
         //in case of video tag it will draw the frame of the video at that instance
         if (filter != "") {
