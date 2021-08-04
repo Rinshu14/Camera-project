@@ -67,7 +67,7 @@ span
   
      width:5rem; 
     flex-grow:1;/*it will devide the parent space in its given value */
-    background-image: url("pic.jpg");
+    background-image: url(https://images-na.ssl-images-amazon.com/images/I/91wcUPNHFEL.png);
     background-size: cover;
     background-blend-mode: color-burn;
 }
